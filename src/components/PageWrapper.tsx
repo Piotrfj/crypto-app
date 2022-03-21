@@ -34,7 +34,7 @@ const PageWrapper: React.FC = () => {
     }
 
     return (
-        <main className='home'>
+        <>
             {coinList.length > 0 &&
                 <CurrencySelection handleChange={handleChange} handleDelete={handleDelete} coinList={coinList} selectedCurrencies={selectedCurrencies}/>
             }
@@ -45,7 +45,7 @@ const PageWrapper: React.FC = () => {
                     <Chart key={currency} currency={currency} colorIndex={i}/>
                 ))}
             </div>
-        </main>
+        </>
     );
 }
 

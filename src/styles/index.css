@@ -4,14 +4,9 @@
     font-family: 'Roboto', sans-serif;
 }
 
-.home {
-    position: relative;
-}
-
 .currencies-selection {
     position: sticky;
     top: 0;
-    margin: 0 1rem;
     padding: 3rem 0;
     background-color: white;
     z-index: 999;
@@ -20,6 +15,7 @@
 .currencies-selection__content {
     max-width: 700px;
     margin: 0 auto;
+    padding: 0 1rem;
 }
 
 .currencies-selection__select {
