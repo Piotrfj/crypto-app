@@ -2,25 +2,18 @@ import * as React from 'react';
 import Chart from './Chart';
 import { BaseSyntheticEvent, useEffect, useState } from 'react';
 import { loadCurrenciesFromStorage, saveCurrenciesToStorage } from '../services/localStorageService';
-import SelectedCurrenciesList from './SelectedCurrenciesList';
-
-const coinList = [
-    'ethereum',
-    'bitcoin',
-    'monero',
-    'dogecoin',
-    'polkadot',
-    'litecoin',
-    'binancecoin',
-    'solana',
-    'cosmos',
-]
+import { Coin, getCoinList } from '../services/api-service';
+import CurrencySelection from './CurrencySelection';
 
 const PageWrapper: React.FC = () => {
     const [selectedCurrencies, setSelectedCurrencies] = useState<string[]>([]);
+    const [coinList, setCoinList] = useState<Coin[]>([]);
 
     useEffect(() => {
         setSelectedCurrencies(loadCurrenciesFromStorage());
+        getCoinList().then(data => {
+            setCoinList(data)
+        })
     }, []);
 
     const handleChange = (event: BaseSyntheticEvent) => {
@@ -31,7 +24,7 @@ const PageWrapper: React.FC = () => {
         }
     }
 
-    const deleteFromList = (value: string) => () => {
+    const handleDelete = (value: string) => () => {
         saveCurrenciesState(selectedCurrencies.filter(currency => currency !== value));
     }
 
@@ -41,18 +34,10 @@ const PageWrapper: React.FC = () => {
     }
 
     return (
-        <>
-            <div className='currencies-selection'>
-                <select className="currencies-selection__select"
-                        disabled={selectedCurrencies.length >= 5}
-                        onChange={handleChange}
-                        data-testid="select">
-                    <option value="" hidden>Choose a coin</option>
-                    {coinList.map(coin => <option key={coin} disabled={selectedCurrencies.includes(coin)} value={coin}>{coin}</option>)}
-                </select>
-
-                <SelectedCurrenciesList currencies={selectedCurrencies} handleClick={deleteFromList}/>
-            </div>
+        <main className='home'>
+            {coinList.length > 0 &&
+                <CurrencySelection handleChange={handleChange} handleDelete={handleDelete} coinList={coinList} selectedCurrencies={selectedCurrencies}/>
+            }
 
             <div className="chart-list"
                  data-testid="chart-list">
@@ -60,7 +45,7 @@ const PageWrapper: React.FC = () => {
                     <Chart key={currency} currency={currency} colorIndex={i}/>
                 ))}
             </div>
-        </>
+        </main>
     );
 }
 

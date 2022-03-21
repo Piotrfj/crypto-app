@@ -1,57 +1,74 @@
 *, *::before, *::after {
-  margin: 0;
-  padding: 0;
-  font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.home {
+    position: relative;
 }
 
 .currencies-selection {
-  width: 700px;
-  margin: 5rem auto;
+    position: sticky;
+    top: 0;
+    margin: 0 1rem;
+    padding: 3rem 0;
+    background-color: white;
+    z-index: 999;
+}
+
+.currencies-selection__content {
+    max-width: 700px;
+    margin: 0 auto;
 }
 
 .currencies-selection__select {
-  padding: 1rem;
-  cursor: pointer;
-  border: 1px solid rgba(0, 0, 0, 0.87);
-  border-radius: .25rem;
-  width: 100%;
-  margin-bottom: 2rem;
-  font-size: 1.25rem;
+    padding: 1rem;
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.87);
+    border-radius: .25rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
 }
 
 .currencies-selection__select option {
-  text-transform: capitalize;
+    text-transform: capitalize;
 }
 
 .currencies-list {
-  display: grid;
-  grid-auto-flow: column;
-  grid-column-gap: .5rem;
-  justify-content: left;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.currencies-list button {
+    margin: .25rem;
 }
 
 .chart-list {
-  display: grid;
-  justify-content: center;
-  row-gap: 1.5rem;
+    display: grid;
+    justify-content: center;
+    row-gap: 1.5rem;
 }
 
 .chart {
-  position: relative;
-  min-width: 1000px;
-  min-height: 400px;
+    position: relative;
+    max-width: 1000px;
+    width: 100vw;
+    height: 50vw;
+    max-height: 400px;
 }
 
 .chart__heading {
-  margin: 0 0 .5rem 2rem;
-  font-size: 1.25rem;
-  font-weight: 600;
-  text-transform: capitalize;
+    margin: 0 0 .5rem 2rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-transform: capitalize;
 }
 
 .chart__loading-spinner {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
